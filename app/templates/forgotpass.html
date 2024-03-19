@@ -1,0 +1,14 @@
+<!-- forgot_password.html -->
+{% extends 'base.html' %}
+
+{% block title %}Forgot Password{% endblock %}
+
+{% block content %}
+    <div class="col-lg-6 wow fadeIn" data-wow-delay="0.3s">
+        <form method="post" action="{% url 'forgot_password' %}">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn btn-primary">Send OTP</button>
+        </form>
+    </div>
+{% endblock %}

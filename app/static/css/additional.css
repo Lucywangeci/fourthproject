@@ -1,0 +1,75 @@
+     body {
+      background-image: url('images/background.jpg');
+      background-size: cover;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-attachment: fixed;
+      color: #fd0091;
+    }
+
+
+
+
+    .login-container {
+      margin-top: 100px; /* Increased margin-top for more space at the top */
+      max-width: 500px; /* Increased max-width for a larger form */
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .login-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .login-card-header {
+      background-color: #3498db;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .login-form {
+      padding: 30px; /* Increased padding for a larger form */
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .btn-login {
+      background-color: #e91e63;
+      color: #fff;
+      padding: 12px; /* Increased padding for a larger button */
+      border-radius: 5px;
+    }
+
+
+
+    .signup-container {
+      margin-top: 50px;
+      max-width: 600px;
+    }
+    .signup-card {
+      border: none;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .signup-card-header {
+      background-color: #3498db; /* Blue header */
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+    }
+    .signup-form {
+      padding: 20px;
+    }
+    .form-group {
+      margin-bottom: 20px;
+    }
+    .btn-signup {
+      background-color: #e91e63; /* Pink button */
+      color: #fff;
+      padding: 10px;
+      border-radius: 5px;
+    }

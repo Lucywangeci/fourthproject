@@ -1,0 +1,120 @@
+<!-- create_appointment.html -->
+
+{% extends 'base.html' %}
+
+{% block title %}Create Appointment{% endblock %}
+
+{% block body %}
+    <div class="row mt-5">
+        <div class="col-md-6 offset-md-3">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title">Create Appointment</h2>
+
+
+<form id="appointmentForm">
+    {% csrf_token %}
+
+    <div class="form-group mb-3">
+        <label for="parent_name">Parent Name:</label>
+        <input type="text" class="form-control" name="parent_name" id="parent_name" required> {{ appointment.parent_name }}
+    </div>
+
+    <div class="form-group mb-3">
+        <label for="appointment_date">Choose a Day:</label>
+        <input type="date" class="form-control" name="appointment_date" id="appointment_date" value="{{ appointment.id }}" required>
+    </div>
+                        <div class="form-group mb-3">
+                            <label for="appointment_type">Appointment Type:</label>
+                            <select class="form-control" name="appointment_type" id="appointment_type" required>
+                                <option value="home_babysitter">Home Babysitter</option>
+                                <option value="home_tutor">Home Tutor</option>
+                                <option value="school_babysitter">School Babysitter</option>
+                                <option value="school_tutor">School Tutor</option>
+                                <option value="home_playbuddy">Home Playbuddy</option>
+                                <option value="course_program">Course/Program</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="appointment_date">Choose a Day:</label>
+                            <input type="date" class="form-control" name="appointment_date" id="appointment_date" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="duration">Choose Duration (in hours):</label>
+                            <input type="number" class="form-control" name="duration" id="duration" min="1" required>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="payment_option">Payment Option:</label>
+                            <select class="form-control" name="payment_option" id="payment_option" required>
+                                <option value="credit_card">Credit Card</option>
+                                <option value="paypal">PayPal</option>
+                                <option value="cash">Cash</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="amount_to_pay">Amount to Pay:</label>
+                            <span id="amount_to_pay">0</span> Shillings
+                        </div>
+    <!-- ... other form fields ... -->
+
+    <button type="button" class="btn btn-primary" onclick="createAppointment()">Create Appointment</button>
+</form>
+
+
+                    <div id="message" class="mt-3"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calculateAmount() {
+            const appointmentType = document.getElementById('appointment_type').value;
+            const duration = document.getElementById('duration').value;
+
+            let rate = 0;
+
+            if (appointmentType === 'home_babysitter' || appointmentType === 'home_tutor') {
+                rate = 100;
+            } else if (appointmentType === 'school_babysitter' || appointmentType === 'school_tutor') {
+                rate = 50;
+            } else if (appointmentType === 'home_playbuddy') {
+                rate = 1000;
+            } else if (appointmentType === 'course_program') {
+                rate = 10000;
+            }
+
+            const amountToPay = rate * duration;
+            document.getElementById('amount_to_pay').innerText = amountToPay;
+        }
+
+        function createAppointment() {
+            calculateAmount();
+
+            var formData = new FormData(document.getElementById('appointmentForm'));
+
+            fetch('/api/appointments/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.getElementsByName('csrfmiddlewaretoken')[0].value
+                },
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('message').innerText = data.message || data.error;
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+        }
+
+        // Attach the calculateAmount function to relevant input change events
+        document.getElementById('appointment_type').addEventListener('change', calculateAmount);
+        document.getElementById('duration').addEventListener('input', calculateAmount);
+    </script>
+{% endblock %}

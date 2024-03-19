@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block body %}
+
+    <form method="POST" action="/emp">
+        {% csrf_token %}
+        <div>
+            <br>
+            <p>
+                <h3>Enter Details</h3>
+            </p>
+            <div>
+                <p>Employee Id:</p>{{ form.eid }}
+            </div>
+            <div>
+                <p>Employee Name::</p>{{ form.ename }}
+            </div>
+            <div>
+                <p>Employee Email:</p>{{ form.eemail }}
+            </div>
+            <div>
+                <p>Employee contact:</p>{{ form.econtact }}
+            </div>
+            <div>
+                <br>
+                <button type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+{% endblock %}

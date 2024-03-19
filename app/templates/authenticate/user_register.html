@@ -1,0 +1,29 @@
+{% extends 'authenticate/base2.html' %}
+{% load static %}
+{% block body %}
+    {% if form.errors %}
+
+    <div class="container">
+        {% if messages %}
+            {% for message in messages %}
+
+                <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    <strong>There was an error with your form</strong> You should check in on some of those fields below.
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            {% endfor %}
+        {% endif %}
+    </div>
+
+
+    {% endif %}
+    <div class="showdow p-5 mb-5 bg-body rounded">
+    <h1>Register</h1>
+    <form action="{% url 'app:register' %}" method="post">
+    {% csrf_token %}
+    {{ form  }}
+        <br>
+    <input type="submit" value="Submit" class="btn btn-secondary mb-4 ">
+    </form>
+    </div>
+{% endblock %}

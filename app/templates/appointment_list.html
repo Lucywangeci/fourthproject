@@ -1,0 +1,25 @@
+<!-- appointments_list.html -->
+{% extends 'base.html' %}
+{% block title %}Appointments List{% endblock %}
+
+{% block body %}
+    <h2>Appointments List</h2>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Parent Name</th>
+                <th>Appointment Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for appointment in appointments %}
+                <tr>
+                    <td>{{ appointment.id }}</td>
+                    <td>{{ appointment.parent_name }}</td>
+                    <td>{{ appointment.appointment_date }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
